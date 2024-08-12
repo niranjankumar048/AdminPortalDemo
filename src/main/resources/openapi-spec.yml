@@ -1,0 +1,239 @@
+openapi: 3.0.0
+info:
+  title: Admin Portal API
+  description: API for Client Organisations and Personnel Administration Portal
+  version: 1.0.0
+servers:
+  - url: /api
+    description: Development server
+
+paths:
+  /personnel:
+    get:
+      summary: Get all personnel
+      responses:
+        '200':
+          description: A list of personnel
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/Personnel'
+    post:
+      summary: Create a new personnel
+      requestBody:
+        description: The personnel to create
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/Personnel'
+      responses:
+        '200':
+          description: The created personnel
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Personnel'
+
+  /personnel/{id}:
+    get:
+      summary: Get a personnel by ID
+      parameters:
+        - name: id
+          in: path
+          required: true
+          description: The ID of the personnel to retrieve
+          schema:
+            type: integer
+      responses:
+        '200':
+          description: The requested personnel
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Personnel'
+        '404':
+          description: Personnel not found
+
+    put:
+      summary: Update an existing personnel
+      parameters:
+        - name: id
+          in: path
+          required: true
+          description: The ID of the personnel to update
+          schema:
+            type: integer
+      requestBody:
+        description: The updated personnel details
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/Personnel'
+      responses:
+        '200':
+          description: The updated personnel
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Personnel'
+        '404':
+          description: Personnel not found
+
+    delete:
+      summary: Delete a personnel by ID
+      parameters:
+        - name: id
+          in: path
+          required: true
+          description: The ID of the personnel to delete
+          schema:
+            type: integer
+      responses:
+        '200':
+          description: Personnel deleted successfully
+        '404':
+          description: Personnel not found
+
+  /client-organisations:
+    get:
+      summary: Get all client organisations
+      responses:
+        '200':
+          description: A list of client organisations
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/ClientOrganisation'
+    post:
+      summary: Create a new client organisation
+      requestBody:
+        description: The client organisation to create
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/ClientOrganisation'
+      responses:
+        '200':
+          description: The created client organisation
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ClientOrganisation'
+
+  /client-organisations/{id}:
+    get:
+      summary: Get a client organisation by ID
+      parameters:
+        - name: id
+          in: path
+          required: true
+          description: The ID of the client organisation to retrieve
+          schema:
+            type: integer
+      responses:
+        '200':
+          description: The requested client organisation
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ClientOrganisation'
+        '404':
+          description: Client organisation not found
+
+    put:
+      summary: Update an existing client organisation
+      parameters:
+        - name: id
+          in: path
+          required: true
+          description: The ID of the client organisation to update
+          schema:
+            type: integer
+      requestBody:
+        description: The updated client organisation details
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/ClientOrganisation'
+      responses:
+        '200':
+          description: The updated client organisation
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ClientOrganisation'
+        '404':
+          description: Client organisation not found
+
+    delete:
+      summary: Delete a client organisation by ID
+      parameters:
+        - name: id
+          in: path
+          required: true
+          description: The ID of the client organisation to delete
+          schema:
+            type: integer
+      responses:
+        '200':
+          description: Client organisation deleted successfully
+        '404':
+          description: Client organisation not found
+
+components:
+  schemas:
+    Personnel:
+      type: object
+      properties:
+        id:
+          type: integer
+          description: The unique ID of the personnel
+        firstName:
+          type: string
+          description: The first name of the personnel
+        lastName:
+          type: string
+          description: The last name of the personnel
+        username:
+          type: string
+          description: The username of the personnel
+        password:
+          type: string
+          description: The encoded password of the personnel
+        emailAddress:
+          type: string
+          description: The email address of the personnel
+        telephoneNumber:
+          type: string
+          description: The telephone number of the personnel
+        clientOrganisation:
+          $ref: '#/components/schemas/ClientOrganisation'
+
+    ClientOrganisation:
+      type: object
+      properties:
+        id:
+          type: integer
+          description: The unique ID of the client organisation
+        name:
+          type: string
+          description: The name of the client organisation
+        registrationDate:
+          type: string
+          format: date
+          description: The registration date of the client organisation
+        expiryDate:
+          type: string
+          format: date
+          description: The expiry date of the client organisation
+        enabled:
+          type: boolean
+          description: Whether the client organisation is enabled

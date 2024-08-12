@@ -8,12 +8,20 @@ import org.springframework.stereotype.Component;
 
 import java.util.List;
 
+/**
+ * Component for scheduled tasks related to client organisations which will be used to update the
+ * status of expired organisation
+ */
 @Component
 public class ScheduledTasks {
     @Autowired
     private ClientOrganisationService clientOrganisationService;
 
-    @Scheduled(fixedRate = 60000)
+    /**
+     * Checks the expiry dates of client organisations at a fixed rate and disables expired organisations.
+     * This method is scheduled to run everyday at midnight
+     */
+    @Scheduled(cron = "0 0 0 * * ?")
     public void checkExpiryDates() {
         List<ClientOrganisation> expiredOrganisations = clientOrganisationService.getExpiredOrganisations();
         for (ClientOrganisation org : expiredOrganisations) {

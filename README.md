@@ -75,6 +75,8 @@ PUT /api/personnel/{id}: Update an existing personnel record.
 
 DELETE /api/personnel/{id}: Delete a personnel record.
 
+Detailed API spec is located in the src/main/resources/openapi-spec.yml file.
+
 ### 7. Testing
 You can run the tests using Maven:
 ```bash
