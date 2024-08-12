@@ -1,6 +1,7 @@
 package com.demo.adminportal.model;
 
 import jakarta.persistence.*;
+import jakarta.validation.constraints.Pattern;
 import lombok.Data;
 
 @Data
@@ -18,6 +19,8 @@ public class Personnel {
     private String password;
 
     private String emailAddress;
+
+    @Pattern(regexp = "^\\+?[0-9]{10,15}$", message = "Invalid phone number")
     private String telephoneNumber;
 
     @ManyToOne

@@ -19,6 +19,9 @@ $(document).ready(function() {
         if (message.includes("Unique index or primary key violation")) {
             displayMessage = "An organisation with this name already exists. Please choose a different name.";
         }
+        if (message.includes("Invalid phone number")) {
+            displayMessage = "Please enter valid phone number e.g. 07123456789";
+        }
         const errorPopup = $('<div class="error-popup"></div>').text(displayMessage);
         $('body').append(errorPopup);
 
@@ -200,7 +203,7 @@ $(document).ready(function() {
                         <label>E-mail Address</label>
                         <input type="email" id="email" required>
                         <label>Telephone Number</label>
-                        <input type="text" id="telephoneNumber" required>
+                        <input type="tel" id="telephoneNumber" maxlength="15" placeholder="e.g. 07123456789" required>
                         <button type="submit">Submit</button>
                     </form>
                 `);
@@ -226,6 +229,11 @@ $(document).ready(function() {
                         success: function() {
                             loadClientOrganisationList();
                             $('#client-organisation-form').empty();
+                        },
+                        error: function(xhr, status, error) {
+                            // Show error popup with appropriate message
+                            let errorMessage = xhr.responseJSON?.trace || 'An error occurred while adding the personnel.';
+                            showErrorPopup(errorMessage);
                         }
                     });
                 });
@@ -305,7 +313,7 @@ $(document).ready(function() {
                                         <label>Username</label>
                                         <input type="text" id="username" value="${data.username}" required>
                                         <label>Password</label>
-                                        <input type="password" id="password">
+                                        <input type="password" id="password" required>
                                         <label>E-mail Address</label>
                                         <input type="email" id="email" value="${data.emailAddress}" required>
                                         <label>Telephone Number</label>
@@ -347,6 +355,11 @@ $(document).ready(function() {
                             data: JSON.stringify(updatedPersonnel),
                             success: function() {
                                 loadPersonnel();
+                            },
+                            error: function(xhr, status, error) {
+                                // Show error popup with appropriate message
+                                let errorMessage = xhr.responseJSON?.trace || 'An error occurred while editing the personnel.';
+                                showErrorPopup(errorMessage);
                             }
                         });
                     });
