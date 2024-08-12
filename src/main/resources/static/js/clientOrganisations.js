@@ -317,7 +317,7 @@ $(document).ready(function() {
                                         <label>E-mail Address</label>
                                         <input type="email" id="email" value="${data.emailAddress}" required>
                                         <label>Telephone Number</label>
-                                        <input type="text" id="telephoneNumber" value="${data.telephoneNumber}" required>
+                                        <input type="tel" id="telephoneNumber" value="${data.telephoneNumber}" required>
                                         <label>Client Organisation</label>
                                         <select id="clientId" required></select>
                                         <button type="submit">Submit</button>
