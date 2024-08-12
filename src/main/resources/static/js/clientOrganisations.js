@@ -12,6 +12,23 @@ $(document).ready(function() {
         loadPersonnel();
     });
 
+    // Function to show popup in case of an error
+    function showErrorPopup(message) {
+        let displayMessage = message;
+        // Check if the message contains "Unique index or primary key violation"
+        if (message.includes("Unique index or primary key violation")) {
+            displayMessage = "An organisation with this name already exists. Please choose a different name.";
+        }
+        const errorPopup = $('<div class="error-popup"></div>').text(displayMessage);
+        $('body').append(errorPopup);
+
+        // Automatically remove the popup after 3 seconds
+        setTimeout(() => {
+            errorPopup.fadeOut(500, () => {
+                errorPopup.remove();
+            });
+        }, 3000);
+    }
     function loadHomePage() {
         $('#content').html('<h2>Welcome to the Admin Portal</h2>');
         $.get('http://localhost:8080/api/client-organisations', function(data) {
