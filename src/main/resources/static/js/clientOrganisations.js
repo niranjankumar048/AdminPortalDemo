@@ -99,6 +99,11 @@ $(document).ready(function() {
                     success: function() {
                         loadClientOrganisationList();
                         $('#client-organisation-form').empty();
+                    },
+                    error: function(xhr, status, error) {
+                        // Show error popup with appropriate message
+                        let errorMessage = xhr.responseJSON?.message || 'An error occurred while creating the organisation.';
+                        showErrorPopup(errorMessage);
                     }
                 });
             });
