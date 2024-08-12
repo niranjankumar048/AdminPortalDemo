@@ -30,8 +30,8 @@ This project is a web-based administration portal for managing client organisati
 ### 1. Clone the Repository
 
 ```bash
-git clone https://github.com/your-username/client-admin-portal.git
-cd client-admin-portal
+git clone https://github.com/niranjankumar048/AdminPortalDemo
+cd AdminPortalDemo
 ```
 ### 2. Build the project
 Use Maven to build the project:
